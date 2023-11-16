@@ -1,0 +1,53 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile.dev.dockerfile
+      args:
+        - STACK=backend
+    env_file:
+      - ../backend/.env
+    volumes:
+      - ../backend:/var/www/backend
+    ports:
+      - "3000:80"
+    depends_on:
+      - database
+    networks:
+      - network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile.dev.dockerfile
+      args:
+        - STACK=frontend
+    env_file:
+      - ../frontend/.env
+    volumes:
+      - ../frontend:/var/www/frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - network
+
+  database:
+    container_name: database
+    image: mysql:8.0.33
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ../data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    command: mysqld --default-authentication-plugin=mysql_native_password --sql_mode="only_full_group_by"
+    networks:
+      - network
+
+networks:
+  network:
