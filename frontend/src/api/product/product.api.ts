@@ -4,39 +4,43 @@ import { ProductResponse } from "@src/api/product/product.response";
 
 const apiHost = process.env.NEXT_PUBLIC_API_HOST;
 
-export function useProductApi(url?: string, ai: boolean = false) {
+export function useProductApi(url?: string, ai?: boolean) {
   const [data, setData] = useState<ProductResponse | undefined>(undefined);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
+  const [status, setStatus] = useState<"idle" | "loading" | "loaded" | "error">("idle");
+
   const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (!url) return;
 
-    setStatus('loading');
+    setStatus("loading");
     setError(undefined);
     setData(undefined);
 
     console.log(apiHost);
 
-    axios.get(`${apiHost}/product`, {
-      params: {
-        url,
-        ai
-      }
-    }).then((response) => {
-      setData(response.data);
-      setStatus('loaded');
-    }).catch((error) => {
-      setError(error.message);
-      setStatus('error');
-    });
+    axios
+      .get(`${apiHost}/product`, {
+        params: {
+          url,
+          ai: ai ? "true" : "",
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+        setStatus("loaded");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setStatus("error");
+      });
 
     return () => {
-      setStatus('idle');
+      setStatus("idle");
       setData(undefined);
       setError(undefined);
-    }
+    };
   }, [url, ai]);
 
-  return {data, status, error};
+  return { data, status, error };
 }

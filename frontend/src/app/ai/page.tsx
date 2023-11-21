@@ -1,5 +1,5 @@
-import PageSearch from '@src/app/page';
+import PageSearch from "@src/app/page";
 
 export default function Page() {
-  return <PageSearch ai/>
+  return <PageSearch ai />;
 }

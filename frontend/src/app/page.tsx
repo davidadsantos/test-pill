@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { cn, cx } from "@src/lib/utils";
 import { Icons } from "@src/components/icons";
@@ -11,9 +11,9 @@ interface Props {
   ai?: boolean;
 }
 
-const Page = ({ai}: Props) => {
+const Page = ({ ai }: Props) => {
   const dispatch = useDispatch();
-  const {push} = useRouter();
+  const { push } = useRouter();
   const [url, setUrl] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const IconSearch = ai ? Icons.searchAi : Icons.search;
@@ -22,7 +22,7 @@ const Page = ({ai}: Props) => {
     if (url?.match(/^(http|https):\/\/[^ "]+$/)) {
       dispatch(showLoading());
 
-      void push(`/product?url=${url}&ai=${ai ? 'true' : ''}`);
+      void push(`/product?url=${url}&ai=${ai ? "true" : ""}`);
       return;
     }
 
@@ -58,7 +58,8 @@ const Page = ({ai}: Props) => {
           <input
             className={cx({
               "h-16 p-4 flex justify-center items-center rounded-lg": true,
-              "border-gray-200 shadow-lg border-2 focus:outline-none focus:border-gray-300 focus:shadow-md transition-all": true,
+              "border-gray-200 shadow-lg border-2 focus:outline-none focus:border-gray-300 focus:shadow-md transition-all":
+                true,
               "text-lg": true,
               "text-red-500 border-red-500 focus:border-red-500 focus:shadow-red-md": !!error,
             })}
@@ -72,9 +73,7 @@ const Page = ({ai}: Props) => {
               }
             }}
           />
-          {error && (
-            <span className="text-red-500 text-sm py-2">{error}</span>
-          )}
+          {error && <span className="text-red-500 text-sm py-2">{error}</span>}
         </div>
         <button
           className={cn([
@@ -84,7 +83,7 @@ const Page = ({ai}: Props) => {
           ])}
           onClick={onClickButton}
         >
-          <IconSearch className="w-10 h-10"/>
+          <IconSearch className="w-10 h-10" />
         </button>
       </div>
       <div className="flex items-center content-center mt-10">
@@ -97,6 +96,6 @@ const Page = ({ai}: Props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Page;
