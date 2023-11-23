@@ -54,3 +54,7 @@ Resposta de Erro (404 Not Found)
   "error": "Produto não encontrado"
 }
 ```
+
+### OpenApi
+
+Para mais informações, consulte o arquivo [openapi.yaml](openapi.yml).
