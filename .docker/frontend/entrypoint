@@ -1,4 +1,5 @@
 #!/bin/sh
 
 pnpm install
-pnpm run dev
+pnpm build
+pnpm start
