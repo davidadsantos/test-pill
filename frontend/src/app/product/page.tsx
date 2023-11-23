@@ -26,11 +26,11 @@ export default function ProductPage() {
     >
       <div
         className={cx({
-          "m-6 md:m-0 md:mx-6 md:w-1/2 md:p-0 rounded-lg": true,
+          "m-6 md:m-0 md:mx-6 md:w-1/2 md:p-0 rounded-lg flex justify-center": true,
           "bg-gray-300 [&_*]:invisible": isLoading,
         })}
       >
-        {!!data && <Image src={data.image} alt={data.name} className="w-full h-full aspect-video rounded-lg" />}
+        {!!data && <Image src={data.image} alt={data.name} className="rounded-lg max-h-96" />}
       </div>
       <div className="px-6 pt-2 flex flex-col gap-6 md:w-1/2 md:py-2">
         <h1

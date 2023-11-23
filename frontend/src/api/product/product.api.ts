@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { ProductResponse } from "@src/api/product/product.response";
+import { useOnMount } from "@src/hooks/useOnMount";
 
 const apiHost = process.env.NEXT_PUBLIC_API_HOST;
 
@@ -10,17 +11,17 @@ export function useProductApi(url?: string, ai?: boolean) {
 
   const [error, setError] = useState<string | undefined>(undefined);
 
-  useEffect(() => {
-    if (!url) return;
+  useOnMount(() => {
+    if (!url || status !== "idle") {
+      return;
+    }
 
     setStatus("loading");
     setError(undefined);
     setData(undefined);
 
-    console.log(apiHost);
-
     axios
-      .get(`${apiHost}/product`, {
+      .get(`${apiHost}/api/product`, {
         params: {
           url,
           ai: ai ? "true" : "",
@@ -34,13 +35,7 @@ export function useProductApi(url?: string, ai?: boolean) {
         setError(error.message);
         setStatus("error");
       });
-
-    return () => {
-      setStatus("idle");
-      setData(undefined);
-      setError(undefined);
-    };
-  }, [url, ai]);
+  });
 
   return { data, status, error };
 }
