@@ -1,4 +1,4 @@
-import { AiHandler } from "./crawler/handlers/ai.handler";
+import AiHandler from "./crawler/handlers/ai.handler";
 import { DrogasilHandler } from "./crawler/handlers/drogasil.handler";
 import { ICrawlerHandler, IProduct } from "./crawler/handlers/abstract.handler";
 

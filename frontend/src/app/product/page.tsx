@@ -30,7 +30,7 @@ export default function ProductPage() {
           "bg-gray-300 [&_*]:invisible": isLoading,
         })}
       >
-        {!!data && <Image src={data.image} alt={data.name} className="rounded-lg max-h-96" />}
+        {!!data && <img src={data.image} alt={data.name} className="rounded-lg max-h-96" />}
       </div>
       <div className="px-6 pt-2 flex flex-col gap-6 md:w-1/2 md:py-2">
         <h1

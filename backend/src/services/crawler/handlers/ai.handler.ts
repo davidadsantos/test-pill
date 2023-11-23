@@ -1,4 +1,4 @@
-import { ICrawlerHandler, IProduct } from "./abstract.handler";
+import { CrawlerHandler, ICrawlerHandler, IProduct } from "./abstract.handler";
 import { compile } from "html-to-text";
 import { RecursiveUrlLoader } from "langchain/document_loaders/web/recursive_url";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
@@ -16,9 +16,8 @@ const PROMPT = `
     { "name": "string", "price": 0.0, "description": "string",  "image": "string", "barcode": "string" }
     `;
 
-export class AiHandler implements ICrawlerHandler {
+export class AiHandler extends CrawlerHandler {
   public async handle(url: string): Promise<IProduct | false> {
-
     const docs = await this.loadDocs(url);
 
     const embeddings = new OpenAIEmbeddings({
@@ -66,3 +65,5 @@ export class AiHandler implements ICrawlerHandler {
     return await loader.loadAndSplit(splitter);
   }
 }
+
+export default AiHandler;

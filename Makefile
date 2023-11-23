@@ -17,3 +17,11 @@ bash-frontend:
 
 logs:
 	docker compose -f .docker/docker-compose.dev.yml logs -f
+
+test-front:
+	docker compose -f .docker/docker-compose.dev.yml exec frontend pnpm test
+
+test-back:
+	docker compose -f .docker/docker-compose.dev.yml exec backend pnpm test
+
+test: test-front test-back
