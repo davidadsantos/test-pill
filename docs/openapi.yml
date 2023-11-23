@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: API
+  description: Documentação da API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/product:
+    get:
+      summary: Obtém informações de um produto
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: URL da página do produto
+          schema:
+            type: string
+        - name: ai
+          in: query
+          required: false
+          description: Parâmetro opcional para busca usando AI
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              example:
+                name: "LUTEÍNA + ASTAXANTINA + VITAMINA A MADE IN USA NATURE DAILY 60 COMPRIMIDOS SIDNEY OLIVEIRA"
+                image: "https://cdn.ultrafarma.com.br/static/produtos/821656/small-638221801524360108-821656_3.png"
+                description: "Suplemento Alimentar de Luteína + Astaxantina + Vitamina A em Comprimidos. - A Vitamina A auxilia na Visão - Contém 20 mg de Luteína + 6 mg de Astaxantina + 600 mcg de Vitamina A em 1 comprimido. - Produto fabricado sob certificação FDA. - Made in U.S.A"
+                price: 39.9
+                barcode: "7908423402841"
+        '404':
+          description: Not Found

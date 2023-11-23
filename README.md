@@ -45,6 +45,10 @@ make test
 
 Para mais informações, consulte o arquivo [Makefile](Makefile) na raiz do projeto.
 
+## Documentação da API
+
+Acesse a documentação da API em [api.md](docs/api.md).
+
 
 
 
